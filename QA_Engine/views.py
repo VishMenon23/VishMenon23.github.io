@@ -4,7 +4,7 @@ import pandas as pd
 import random
 import csv
 #http://vish23.pythonanywhere.com/
-views_1 = Blueprint(__name__,"views_1")
+views = Blueprint(__name__,"views")
 
 def Generate_Questions(num_questions):
     airbnb = pd.read_csv("https://raw.githubusercontent.com/dev7796/data101_tutorial/main/files/dataset/airbnb.csv")
@@ -74,12 +74,12 @@ def Generate_Questions(num_questions):
     return questions
 
 # Home Page Root
-@views_1.route('/')
+@views.route('/')
 def home():
     return render_template('home.html')
 
 # Question Generation Root
-@views_1.route('/generate', methods=['POST'])
+@views.route('/generate', methods=['POST'])
 def generate():
     num_questions = int(request.form['num_questions'])          # Retrieving the number of questions from the user.
     generated_questions = Generate_Questions(num_questions)     # Calling the Generate_Questions funtion to generate 'num_questions' questions
